@@ -4,16 +4,16 @@ import Editor from './Editor';
 
 const documents = [
   	{
-    	title: 'first doc',
-    	content: 'one 1 one 1 one 1 one'
+    	title: 'First Doc',
+    	content: 'One 1 one 1 one 1 one'
   	},
   	{
-    	title: 'second doc',
-    	content: 'two 2 two 2 two 2 two'
+    	title: 'Second Doc',
+    	content: 'Two 2 two 2 two 2 two'
   	},
   	{
-    	title: 'third doc',
-    	content: 'three 3 three 3 three 3 three'
+    	title: 'Third Doc',
+    	content: 'Three 3 three 3 three 3 three'
   	}
 ];
 
@@ -31,20 +31,27 @@ class App extends Component {
       	<main>
         	<List 
           		listDocs={documents}
-          		clickHandler={this._setContent}
+          		clickHandler={this._setContentTitle}
         	/>
         	<Editor
 				displayContent={this.state.content}
 				displayTitle={this.state.title}
+				changeHandler={this._setContent}
         	/>
       	</main>
     	);
 	}
 	
-	_setContent = (docContent, docTitle) => {
+	_setContentTitle = (docContent, docTitle) => {
 		this.setState({
 			content: docContent,
 			title: docTitle
+		});
+	}
+
+	_setContent = (docContent) => {
+		this.setState({
+			content: docContent
 		});
 	}
 	
