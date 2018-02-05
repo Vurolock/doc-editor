@@ -9,7 +9,7 @@ const List = (props) => {
                 className="title"
                 onClick={ (event) => {
                     // console.log(doc.content);
-                    props.clickHandler(doc.content);
+                    props.clickHandler(doc.content, doc.title);
                 }}
             >
                 {doc.title}

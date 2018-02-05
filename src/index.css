@@ -54,3 +54,7 @@ main {
   height: 100%;
   padding: 40px;
 }
+
+.editor-title {
+  font-size: 20px;
+}

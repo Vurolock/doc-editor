@@ -21,7 +21,8 @@ class App extends Component {
   	constructor(props) {
     	super(props);
     	this.state = {
-      		content: ''
+			content: '',
+			title: 'Click a document to start'  
     	}
   	}
 
@@ -34,14 +35,16 @@ class App extends Component {
         	/>
         	<Editor
 				displayContent={this.state.content}
+				displayTitle={this.state.title}
         	/>
       	</main>
     	);
 	}
 	
-	_setContent = (docContent) => {
+	_setContent = (docContent, docTitle) => {
 		this.setState({
-			content: docContent
+			content: docContent,
+			title: docTitle
 		});
 	}
 	
