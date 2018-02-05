@@ -4,7 +4,16 @@ const List = (props) => {
 
     let titles = props.listDocs.map((doc, index) => {
         return (
-            <div key={index} className="title">{doc.title}</div>
+            <div
+                key={index}
+                className="title"
+                onClick={ (event) => {
+                    // console.log(doc.content);
+                    props.clickHandler(doc.content);
+                }}
+            >
+                {doc.title}
+            </div>
         )
     });
 
