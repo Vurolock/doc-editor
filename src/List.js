@@ -19,6 +19,16 @@ const List = (props) => {
 
     return (
         <div className="title-list">
+            <button
+                className="btn btn-success new-doc-btn"
+                type="button"
+                onClick={ (event) => {
+                    let newTitle = prompt("Title:");
+                    props.addNewClickHandler(newTitle);
+                }}
+            >
+            Add New Doc
+            </button>
             {titles}
         </div>
     );

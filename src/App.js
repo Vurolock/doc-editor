@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import List from './List';
 import Editor from './Editor';
 
-const documents = [
+let documents = [
   	{
     	title: 'First Doc',
     	content: 'One 1 one 1 one 1 one'
@@ -21,8 +21,9 @@ class App extends Component {
   	constructor(props) {
     	super(props);
     	this.state = {
+			title: 'Click a document to start',  
 			content: '',
-			title: 'Click a document to start'  
+			docs: documents
     	}
   	}
 
@@ -31,12 +32,14 @@ class App extends Component {
       	<main>
         	<List 
           		listDocs={documents}
-          		clickHandler={this._setContentTitle}
+				  clickHandler={this._setContentTitle}
+				  addNewClickHandler={this._addNewDoc}
         	/>
         	<Editor
 				displayContent={this.state.content}
 				displayTitle={this.state.title}
 				changeHandler={this._setContent}
+				clickHandler={this._setContent}
         	/>
       	</main>
     	);
@@ -53,6 +56,16 @@ class App extends Component {
 		this.setState({
 			content: docContent
 		});
+	}
+
+	_addNewDoc = (newTitle) => {
+		this.setState({
+			docs: documents.push({
+				title: newTitle,
+				content: ''
+			})
+		});
+		console.log(documents);
 	}
 	
 }

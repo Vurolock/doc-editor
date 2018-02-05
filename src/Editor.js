@@ -14,7 +14,15 @@ const Editor = (props) => {
                     }}    
                 />
             </div>
-            <button className="btn btn-primary" type="button">Save Changes</button>
+            <button
+                className="btn btn-primary"
+                type="button"
+                onClick={ (event) => {
+                    props.clickHandler(event.target.value);
+                }}
+            >
+                Save Changes
+            </button>
         </form>
     );
 }
