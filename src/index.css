@@ -32,6 +32,8 @@ main {
 }
 
 .title-list {
+  display: flex;
+  flex-direction: column;
   width: 20%;
   height: 100%;
   padding: 16px 10px;
@@ -41,7 +43,7 @@ main {
 }
 
 .new-doc-btn {
-  margin-bottom: 16px;
+  margin: 0 5px 16px 3px;
 }
 
 .title {
@@ -61,4 +63,8 @@ main {
 
 .editor-title {
   font-size: 20px;
+}
+
+.form-control {
+  color: #212529;
 }
