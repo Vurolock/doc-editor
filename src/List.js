@@ -21,8 +21,7 @@ const List = (props) => {
                 className="btn btn-success new-doc-btn"
                 type="button"
                 onClick={ () => {
-                    let newTitle = prompt("Title:");
-                    props.addNewClickHandler(newTitle);
+                    props.newDocClickHandler();
                 }}
             >
             Add New Doc

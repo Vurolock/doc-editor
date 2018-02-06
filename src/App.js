@@ -6,8 +6,8 @@ class App extends Component {
   	constructor(props) {
     	super(props);
     	this.state = {
-			index: 0,
-			title: 'Click a document to start',  
+			index: null,
+			title: '',  
 			content: '',
 			docs: [
 				{
@@ -29,10 +29,11 @@ class App extends Component {
   	render() {
     	return (
       	<main>
-        	<List 
+			<List
+				docIndex={this.state.index}
           		listDocs={this.state.docs}
 				clickHandler={this._setListDocument}
-				addNewClickHandler={this._addNewDoc}
+				newDocClickHandler={this._addNewDoc}
         	/>
         	<Editor
 				docIndex={this.state.index}
@@ -62,42 +63,50 @@ class App extends Component {
 		});
 	}
 
-	_editDocument = (docIndex, editedContent, editedTitle) => {
-		let newDocuments = this.state.docs.map((doc, index) => {
-			if (index === docIndex) {
-				doc.content = editedContent;
-				doc.title = editedTitle;
-			}
-			return doc;
-		});
-		this.setState({
-			docs: newDocuments
-		});
+	_editDocument = (docIndex, editedTitle, editedContent) => {
+		if (docIndex === null) {
+			this.setState({
+				index: (this.state.docs.length),
+				docs: this.state.docs.concat({
+					title: editedTitle,
+					content: editedContent
+				})
+			})
+		} else {
+			let newDocuments = this.state.docs.map((doc, index) => {
+				if (index === docIndex) {
+					doc.content = editedContent;
+					doc.title = editedTitle;
+				}
+				return doc;
+			});
+			this.setState({
+				docs: newDocuments
+			});
+		}
+		console.log(this.state.index);
 	}
 
-	_addNewDoc = (newTitle) => {
+	_addNewDoc = () => {
 		this.setState({
-			docs: this.state.docs.concat({
-				title: newTitle,
-				content: ''
-			})
+			index: null,
+			title: '',  
+			content: ''
 		});
 	}
 
 	_deleteDocument = (docIndex) => {
 		let confirmation = window.confirm(`Really delete '${this.state.title}'?`);
-		console.log(confirmation);
 		if (confirmation) {
 			let newDocuments = this.state.docs.filter( (doc, index) => index !== docIndex);
-			// console.log(newDocuments);
 			this.setState({
-				title: 'Click a document to start',  
+				index: null,
+				title: '',  
 				content: '',
 				docs: newDocuments
 			});
-			// console.log('docs:');
-			// console.log(this.state.docs);	
 		}
+		console.log(this.state.index);
 	}
 	
 }

@@ -31,7 +31,7 @@ const Editor = (props) => {
                     className="btn btn-primary"
                     type="button"
                     onClick={ () => {
-                        props.clickHandler(props.docIndex, props.displayContent, props.displayTitle);
+                        props.clickHandler(props.docIndex, props.displayTitle, props.displayContent);
                     }}
                 >
                     Save Changes
