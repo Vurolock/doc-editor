@@ -63,8 +63,9 @@ main {
 
 .editor-title {
   font-size: 20px;
+  margin-bottom: 10px;
 }
 
-.form-control {
+.form-control, .form-control:focus {
   color: #212529;
 }

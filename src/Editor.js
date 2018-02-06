@@ -4,15 +4,27 @@ const Editor = (props) => {
     return (
         <form className="editor">
             <div className="form-group">
-                <label className="editor-title">{props.displayTitle}</label>
+                <input 
+                    type="text"
+                    className="form-control editor-title"
+                    placeholder="Super Awesome Document Title!"
+                    value={props.displayTitle}
+                    onChange={ (event) => {
+                        props.changeHandler(event.target.value, props.displayContent)
+                    }}
+                >
+                </input>
+
                 <textarea
                     className="form-control"
                     placeholder="super awesome document content"
+                    rows="20"
                     value={props.displayContent}
                     onChange={ (event) => {
-                        props.changeHandler(event.target.value);
+                        props.changeHandler(props.displayTitle, event.target.value);
                     }}    
                 />
+
             </div>
             <button
                 className="btn btn-primary"

@@ -38,7 +38,7 @@ class App extends Component {
         	<Editor
 				displayContent={this.state.content}
 				displayTitle={this.state.title}
-				changeHandler={this._setContent}
+				changeHandler={this._setTitleContent}
 				clickHandler={this._editContent}
         	/>
       	</main>
@@ -52,10 +52,10 @@ class App extends Component {
 		});
 	}
 
-	_setContent = (docContent) => {
+	_setTitleContent = (docTitle, docContent) => {
 		this.setState({
-			content: docContent,
-			
+			title: docTitle,
+			content: docContent
 		});
 	}
 
@@ -77,7 +77,6 @@ class App extends Component {
 				content: ''
 			})
 		});
-		console.log(documents);
 	}
 	
 }
