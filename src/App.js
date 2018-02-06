@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import List from './List';
 import Editor from './Editor';
+import reactNotes from './getReactNotes';
+
 
 class App extends Component {
   	constructor(props) {
@@ -9,20 +11,7 @@ class App extends Component {
 			index: null,
 			title: '',  
 			content: '',
-			docs: [
-				{
-					title: 'First Doc',
-					content: 'One 1 one 1 one 1 one'
-				},
-				{
-					title: 'Second Doc',
-					content: 'Two 2 two 2 two 2 two'
-				},
-				{
-					title: 'Third Doc',
-					content: 'Three 3 three 3 three 3 three'
-				}
-		  	]
+			docs: reactNotes
     	}
   	}
 
@@ -75,7 +64,7 @@ class App extends Component {
 						title: docTitle,
 						content: docContent
 					})
-				})
+				}, () => localStorage.setItem('react-notes', JSON.stringify(this.state.docs)));
 			} else {
 				let newDocuments = this.state.docs.map((doc, index) => {
 					if (index === docIndex) {
@@ -86,7 +75,7 @@ class App extends Component {
 				});
 				this.setState({
 					docs: newDocuments
-				});
+				}, () => localStorage.setItem('react-notes', JSON.stringify(this.state.docs)));
 			}
 			console.log(this.state.index);
 		}

@@ -20,9 +20,7 @@ const List = (props) => {
             <button
                 className="btn btn-success new-doc-btn"
                 type="button"
-                onClick={ () => {
-                    props.newDocClickHandler();
-                }}
+                onClick={ props.newDocClickHandler }
             >
             Add New Doc
             </button>

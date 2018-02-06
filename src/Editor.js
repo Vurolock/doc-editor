@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Editor = (props) => {
+    
     return (
         <form className="editor">
             <div className="form-group">
