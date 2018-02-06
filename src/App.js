@@ -2,28 +2,27 @@ import React, { Component } from 'react';
 import List from './List';
 import Editor from './Editor';
 
-let documents = [
-  	{
-    	title: 'First Doc',
-    	content: 'One 1 one 1 one 1 one'
-  	},
-  	{
-    	title: 'Second Doc',
-    	content: 'Two 2 two 2 two 2 two'
-  	},
-  	{
-    	title: 'Third Doc',
-    	content: 'Three 3 three 3 three 3 three'
-  	}
-];
-
 class App extends Component {
   	constructor(props) {
     	super(props);
     	this.state = {
+			key: 0,
 			title: 'Click a document to start',  
 			content: '',
-			docs: documents
+			docs: [
+				{
+					title: 'First Doc',
+					content: 'One 1 one 1 one 1 one'
+				},
+				{
+					title: 'Second Doc',
+					content: 'Two 2 two 2 two 2 two'
+				},
+				{
+					title: 'Third Doc',
+					content: 'Three 3 three 3 three 3 three'
+				}
+		  	]
     	}
   	}
 
@@ -31,48 +30,54 @@ class App extends Component {
     	return (
       	<main>
         	<List 
-          		listDocs={documents}
-				  clickHandler={this._setContentTitle}
-				  addNewClickHandler={this._addNewDoc}
+          		listDocs={this.state.docs}
+				clickHandler={this._setListDocument}
+				addNewClickHandler={this._addNewDoc}
         	/>
         	<Editor
+				docKey={this.state.key}
 				displayContent={this.state.content}
 				displayTitle={this.state.title}
-				changeHandler={this._setTitleContent}
-				clickHandler={this._editContent}
+				changeHandler={this._setEditorDocument}
+				clickHandler={this._editDocument}
         	/>
       	</main>
     	);
 	}
 	
-	_setContentTitle = (docContent, docTitle) => {
+	_setListDocument = (docContent, docTitle, docIndex) => {
 		this.setState({
+			key: docIndex,
 			content: docContent,
 			title: docTitle
 		});
+		console.log(docIndex);
 	}
 
-	_setTitleContent = (docTitle, docContent) => {
+	_setEditorDocument = (docTitle, docContent) => {
 		this.setState({
 			title: docTitle,
 			content: docContent
 		});
 	}
 
-	_editContent = (newContent, title) => {
-		let newDocuments = documents.map(doc => {
+	_editDocument = (newContent, title) => {
+		let newDocuments = this.state.docs.map(doc => {
 			if (doc.title === title) {
 				doc.content = newContent
 			}
-		})
+			return doc;
+
+		});
+		console.log(newDocuments);
 		this.setState({
 			docs: newDocuments
-		})
+		});
 	}
 
 	_addNewDoc = (newTitle) => {
 		this.setState({
-			docs: documents.push({
+			docs: this.state.docs.concat({
 				title: newTitle,
 				content: ''
 			})

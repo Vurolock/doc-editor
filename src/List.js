@@ -1,7 +1,6 @@
 import React from 'react';
 
 const List = (props) => {
-
     let titles = props.listDocs.map((doc, index) => {
         return (
             <div
@@ -9,7 +8,7 @@ const List = (props) => {
                 className="title"
                 onClick={ () => {
                     // console.log(doc.content);
-                    props.clickHandler(doc.content, doc.title);
+                    props.clickHandler(doc.content, doc.title, index);
                 }}
             >
                 {doc.title}

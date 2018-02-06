@@ -22,7 +22,7 @@ const Editor = (props) => {
                     value={props.displayContent}
                     onChange={ (event) => {
                         props.changeHandler(props.displayTitle, event.target.value);
-                    }}    
+                    }}
                 />
 
             </div>
