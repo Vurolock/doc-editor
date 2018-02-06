@@ -7,7 +7,7 @@ const List = (props) => {
             <div
                 key={index}
                 className="title"
-                onClick={ (event) => {
+                onClick={ () => {
                     // console.log(doc.content);
                     props.clickHandler(doc.content, doc.title);
                 }}
@@ -22,7 +22,7 @@ const List = (props) => {
             <button
                 className="btn btn-success new-doc-btn"
                 type="button"
-                onClick={ (event) => {
+                onClick={ () => {
                     let newTitle = prompt("Title:");
                     props.addNewClickHandler(newTitle);
                 }}

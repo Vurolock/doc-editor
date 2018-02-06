@@ -17,8 +17,8 @@ const Editor = (props) => {
             <button
                 className="btn btn-primary"
                 type="button"
-                onClick={ (event) => {
-                    props.clickHandler(event.target.value);
+                onClick={ () => {
+                    props.clickHandler(props.displayContent, props.displayTitle);
                 }}
             >
                 Save Changes

@@ -39,7 +39,7 @@ class App extends Component {
 				displayContent={this.state.content}
 				displayTitle={this.state.title}
 				changeHandler={this._setContent}
-				clickHandler={this._setContent}
+				clickHandler={this._editContent}
         	/>
       	</main>
     	);
@@ -54,8 +54,20 @@ class App extends Component {
 
 	_setContent = (docContent) => {
 		this.setState({
-			content: docContent
+			content: docContent,
+			
 		});
+	}
+
+	_editContent = (newContent, title) => {
+		let newDocuments = documents.map(doc => {
+			if (doc.title === title) {
+				doc.content = newContent
+			}
+		})
+		this.setState({
+			docs: newDocuments
+		})
 	}
 
 	_addNewDoc = (newTitle) => {
