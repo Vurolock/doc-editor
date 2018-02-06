@@ -10,7 +10,7 @@ const Editor = (props) => {
                     placeholder="Super Awesome Document Title!"
                     value={props.displayTitle}
                     onChange={ (event) => {
-                        props.changeHandler(event.target.value, props.displayContent)
+                        props.changeHandler(props.docIndex, event.target.value, props.displayContent)
                     }}
                 >
                 </input>
@@ -21,7 +21,7 @@ const Editor = (props) => {
                     rows="20"
                     value={props.displayContent}
                     onChange={ (event) => {
-                        props.changeHandler(props.displayTitle, event.target.value);
+                        props.changeHandler(props.docIndex, props.displayTitle, event.target.value);
                     }}
                 />
 
@@ -30,7 +30,7 @@ const Editor = (props) => {
                 className="btn btn-primary"
                 type="button"
                 onClick={ () => {
-                    props.clickHandler(props.displayContent, props.displayTitle);
+                    props.clickHandler(props.docIndex, props.displayContent, props.displayTitle);
                 }}
             >
                 Save Changes

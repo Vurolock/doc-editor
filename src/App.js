@@ -6,7 +6,7 @@ class App extends Component {
   	constructor(props) {
     	super(props);
     	this.state = {
-			key: 0,
+			index: 0,
 			title: 'Click a document to start',  
 			content: '',
 			docs: [
@@ -35,7 +35,7 @@ class App extends Component {
 				addNewClickHandler={this._addNewDoc}
         	/>
         	<Editor
-				docKey={this.state.key}
+				docIndex={this.state.index}
 				displayContent={this.state.content}
 				displayTitle={this.state.title}
 				changeHandler={this._setEditorDocument}
@@ -45,31 +45,31 @@ class App extends Component {
     	);
 	}
 	
-	_setListDocument = (docContent, docTitle, docIndex) => {
+	_setListDocument = (docIndex, docContent, docTitle) => {
 		this.setState({
-			key: docIndex,
+			index: docIndex,
 			content: docContent,
 			title: docTitle
 		});
-		console.log(docIndex);
 	}
 
-	_setEditorDocument = (docTitle, docContent) => {
+	_setEditorDocument = (docIndex, docTitle, docContent) => {
 		this.setState({
+			index: docIndex,
 			title: docTitle,
 			content: docContent
 		});
 	}
 
-	_editDocument = (newContent, title) => {
-		let newDocuments = this.state.docs.map(doc => {
-			if (doc.title === title) {
-				doc.content = newContent
+	_editDocument = (docIndex, editedContent, editedTitle) => {
+		let newDocuments = this.state.docs.map((doc, index) => {
+			if (index === docIndex) {
+				doc.content = editedContent;
+				doc.title = editedTitle;
 			}
 			return doc;
 
 		});
-		console.log(newDocuments);
 		this.setState({
 			docs: newDocuments
 		});
