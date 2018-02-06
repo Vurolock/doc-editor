@@ -22,7 +22,7 @@ const List = (props) => {
                 type="button"
                 onClick={ props.newDocClickHandler }
             >
-            Add New Doc
+            New Note
             </button>
             {titles}
         </div>

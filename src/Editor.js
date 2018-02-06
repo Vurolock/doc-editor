@@ -44,7 +44,7 @@ const Editor = (props) => {
                         props.deleteHandler(props.docIndex);
                     }}
                 >
-                    Delete Document
+                    Delete Note
                 </button>
             </div>
             

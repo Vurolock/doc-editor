@@ -99,7 +99,7 @@ class App extends Component {
 				title: '',  
 				content: '',
 				docs: newDocuments
-			});
+			}, () => localStorage.setItem('react-notes', JSON.stringify(this.state.docs)));
 		}
 		console.log(this.state.index);
 	}
