@@ -40,7 +40,7 @@ const Editor = (props) => {
                     className="btn btn-danger"
                     type="button"
                     onClick={ () => {
-                        props.clickHandler(props.docIndex);
+                        props.deleteHandler(props.docIndex);
                     }}
                 >
                     Delete Document
