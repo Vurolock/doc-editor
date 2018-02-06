@@ -85,15 +85,19 @@ class App extends Component {
 	}
 
 	_deleteDocument = (docIndex) => {
-		let newDocuments = this.state.docs.filter( (doc, index) => index !== docIndex);
-		// console.log(newDocuments);
-		this.setState({
-			title: 'Click a document to start',  
-			content: '',
-			docs: newDocuments
-		});
-		// console.log('docs:');
-		// console.log(this.state.docs);
+		let confirmation = window.confirm(`Really delete '${this.state.title}'?`);
+		console.log(confirmation);
+		if (confirmation) {
+			let newDocuments = this.state.docs.filter( (doc, index) => index !== docIndex);
+			// console.log(newDocuments);
+			this.setState({
+				title: 'Click a document to start',  
+				content: '',
+				docs: newDocuments
+			});
+			// console.log('docs:');
+			// console.log(this.state.docs);	
+		}
 	}
 	
 }
