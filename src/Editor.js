@@ -7,7 +7,7 @@ const Editor = (props) => {
                 <input 
                     type="text"
                     className="form-control editor-title"
-                    placeholder="Super Awesome Document Title!"
+                    placeholder="Title..."
                     value={props.displayTitle}
                     onChange={ (event) => {
                         props.changeHandler(props.docIndex, event.target.value, props.displayContent)
@@ -17,7 +17,7 @@ const Editor = (props) => {
 
                 <textarea
                     className="form-control"
-                    placeholder="super awesome document content"
+                    placeholder="Content..."
                     rows="20"
                     value={props.displayContent}
                     onChange={ (event) => {

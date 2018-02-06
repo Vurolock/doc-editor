@@ -40,18 +40,18 @@ class App extends Component {
 				displayContent={this.state.content}
 				displayTitle={this.state.title}
 				changeHandler={this._setEditorDocument}
-				clickHandler={this._editDocument}
+				clickHandler={this._editOrNewDocument}
 				deleteHandler={this._deleteDocument}
         	/>
       	</main>
     	);
 	}
 	
-	_setListDocument = (docIndex, docContent, docTitle) => {
+	_setListDocument = (docIndex, docTitle, docContent) => {
 		this.setState({
 			index: docIndex,
-			content: docContent,
-			title: docTitle
+			title: docTitle,
+			content: docContent
 		});
 	}
 
@@ -63,29 +63,35 @@ class App extends Component {
 		});
 	}
 
-	_editDocument = (docIndex, editedTitle, editedContent) => {
-		if (docIndex === null) {
-			this.setState({
-				index: (this.state.docs.length),
-				docs: this.state.docs.concat({
-					title: editedTitle,
-					content: editedContent
-				})
-			})
+	_editOrNewDocument = (docIndex, docTitle, docContent) => {
+		const regex = /^\s*$/;
+		if (docTitle.match(regex)) {
+			alert('You must have a title!');
 		} else {
-			let newDocuments = this.state.docs.map((doc, index) => {
-				if (index === docIndex) {
-					doc.content = editedContent;
-					doc.title = editedTitle;
-				}
-				return doc;
-			});
-			this.setState({
-				docs: newDocuments
-			});
+			if (docIndex === null) {
+				this.setState({
+					index: (this.state.docs.length),
+					docs: this.state.docs.concat({
+						title: docTitle,
+						content: docContent
+					})
+				})
+			} else {
+				let newDocuments = this.state.docs.map((doc, index) => {
+					if (index === docIndex) {
+						doc.title = docTitle;
+						doc.content = docContent;
+					}
+					return doc;
+				});
+				this.setState({
+					docs: newDocuments
+				});
+			}
+			console.log(this.state.index);
 		}
-		console.log(this.state.index);
 	}
+		
 
 	_addNewDoc = () => {
 		this.setState({

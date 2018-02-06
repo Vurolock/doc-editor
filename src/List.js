@@ -7,7 +7,7 @@ const List = (props) => {
                 key={index}
                 className="title"
                 onClick={ () => {
-                    props.clickHandler(index, doc.content, doc.title);
+                    props.clickHandler(index, doc.title, doc.content);
                 }}
             >
                 {doc.title}
