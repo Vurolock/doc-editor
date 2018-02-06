@@ -69,3 +69,8 @@ main {
 .form-control, .form-control:focus {
   color: #212529;
 }
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+}

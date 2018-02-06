@@ -26,15 +26,27 @@ const Editor = (props) => {
                 />
 
             </div>
-            <button
-                className="btn btn-primary"
-                type="button"
-                onClick={ () => {
-                    props.clickHandler(props.docIndex, props.displayContent, props.displayTitle);
-                }}
-            >
-                Save Changes
-            </button>
+            <div className="form-buttons">
+                <button
+                    className="btn btn-primary"
+                    type="button"
+                    onClick={ () => {
+                        props.clickHandler(props.docIndex, props.displayContent, props.displayTitle);
+                    }}
+                >
+                    Save Changes
+                </button>
+                <button
+                    className="btn btn-danger"
+                    type="button"
+                    onClick={ () => {
+                        props.clickHandler(props.docIndex);
+                    }}
+                >
+                    Delete Document
+                </button>
+            </div>
+            
         </form>
     );
 }

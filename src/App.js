@@ -40,6 +40,7 @@ class App extends Component {
 				displayTitle={this.state.title}
 				changeHandler={this._setEditorDocument}
 				clickHandler={this._editDocument}
+				deleteHandler={this._deleteDocument}
         	/>
       	</main>
     	);
@@ -68,7 +69,6 @@ class App extends Component {
 				doc.title = editedTitle;
 			}
 			return doc;
-
 		});
 		this.setState({
 			docs: newDocuments
@@ -81,6 +81,13 @@ class App extends Component {
 				title: newTitle,
 				content: ''
 			})
+		});
+	}
+
+	_deleteDocument = (docIndex) => {
+		let newDocuments = this.state.docs.filter( (doc, index) => index === docIndex);
+		this.setState({
+			docs: newDocuments
 		});
 	}
 	
