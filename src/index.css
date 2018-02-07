@@ -100,9 +100,19 @@ main {
   border: 1px solid #28a745;
   border-radius: .25rem;
   padding: .375rem .75rem;
-  display: none;
+  filter: opacity(0%);
 }
 
 #save-alert.display-save-alert {
-  display: block;
+  animation: fade 2s linear forwards;
+}
+
+@keyframes fade {
+  5%, 55% {
+    filter: opacity(100%);
+  }
+
+  0%, 100% {
+    filter: opacity(0%);
+  }
 }

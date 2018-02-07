@@ -1,6 +1,10 @@
 import React from 'react';
 
 const Editor = (props) => {
+
+    let changeClass = (classToChange) => {
+        document.getElementById('save-alert').setAttribute('class', classToChange);
+    }
     
     return (
         <form className="editor">
@@ -33,7 +37,8 @@ const Editor = (props) => {
                     type="button"
                     onClick={ () => {
                         props.clickHandler(props.docIndex, props.displayTitle, props.displayContent);
-                        document.getElementById('save-alert').setAttribute('class', 'display-save-alert');
+                        changeClass('display-save-alert');
+                        setTimeout(changeClass, 2000, '');
                     }}
                 >
                     Save Changes
