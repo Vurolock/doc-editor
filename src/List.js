@@ -2,10 +2,14 @@ import React from 'react';
 
 const List = (props) => {
     let titles = props.listDocs.map((doc, index) => {
+        let theClass = "title";
+        if (index === props.docIndex) {
+            theClass = "title active-title"
+        }
         return (
             <div
                 key={index}
-                className="title"
+                className={theClass}
                 onClick={ () => {
                     props.clickHandler(index, doc.title, doc.content);
                 }}
