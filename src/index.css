@@ -87,6 +87,22 @@ main {
 }
 
 .form-buttons {
+  position: relative;
   display: flex;
   justify-content: space-between;
+}
+
+#save-alert {
+  position: absolute;
+  left: 140px;
+  color: #fff;
+  background-color: #28a745;
+  border: 1px solid #28a745;
+  border-radius: .25rem;
+  padding: .375rem .75rem;
+  display: none;
+}
+
+#save-alert.display-save-alert {
+  display: block;
 }

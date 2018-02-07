@@ -33,10 +33,12 @@ const Editor = (props) => {
                     type="button"
                     onClick={ () => {
                         props.clickHandler(props.docIndex, props.displayTitle, props.displayContent);
+                        document.getElementById('save-alert').setAttribute('class', 'display-save-alert');
                     }}
                 >
                     Save Changes
                 </button>
+                <div id="save-alert">Changes Saved!</div>
                 <button
                     className="btn btn-danger"
                     type="button"

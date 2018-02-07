@@ -3,7 +3,6 @@ import List from './List';
 import Editor from './Editor';
 import reactNotes from './getReactNotes';
 
-
 class App extends Component {
   	constructor(props) {
     	super(props);
@@ -105,6 +104,5 @@ class App extends Component {
 	}
 	
 }
-
 
 export default App;
