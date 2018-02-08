@@ -67,7 +67,8 @@ class App extends Component {
 			alert('You must have a title!');
 		} else {
 			if (docId === null) {
-				// POSTS to db using JSON header. Body must be stringified to be sent to backend
+				// New note
+				// POSTS to db using JSON header, body must be stringified to be sent to backend
 				fetch('http://localhost:4000', {
 					method: 'POST',
 					headers: new Headers({
@@ -76,40 +77,45 @@ class App extends Component {
 						title: docTitle,
 						content: docContent
 					})
-				}).then(() => {
-					// GETS from db to set state so notes will have ids assigned by db
-					fetch('http://localhost:4000')
-						.then(res => res.json())
-						.then(notes => {
-							this.setState({
-								id: notes[notes.length - 1].id,
-								docs: notes
-							});
-						});
-				})
-				// this.setState({
-				// 	id: (this.state.docs.length),
-				// 	docs: this.state.docs.concat({
-				// 		title: docTitle,
-				// 		content: docContent
-					// })
-				// }, () => localStorage.setItem('react-notes', JSON.stringify(this.state.docs)));
+				// parse JSON from response
+				}).then(res => res.json())
+					.then(newNote => {
+						this.setState({
+							id: newNote.id,
+							docs: this.state.docs.concat(newNote)
+						}, () => localStorage.setItem('react-notes', JSON.stringify(this.state.docs)));
+					});
 			} else {
-				let newDocuments = this.state.docs.map((doc) => {
-					if (doc.id === docId) {
-						doc.title = docTitle;
-						doc.content = docContent;
-					}
-					return doc;
-				});
-				this.setState({
-					docs: newDocuments
-				}, () => localStorage.setItem('react-notes', JSON.stringify(this.state.docs)));
+				// Edit note
+				// PUTS to db using JSON header, body must be stringified to be sent to backend
+				fetch('http://localhost:4000', {
+					method: 'PUT',
+					headers: new Headers({
+						'Content-Type': 'application/json'}),
+					body: JSON.stringify({
+						id: docId,
+						title: docTitle,
+						content: docContent
+					})
+				// parse JSON from response
+				}).then(res => res.json())
+					.then(editedNote => {
+						let editedDocs = this.state.docs.map(doc => {
+							if (doc.id === editedNote.id) {
+								doc.title = editedNote.title;
+								doc.content = editedNote.content;
+							}
+							return doc;
+						});
+						this.setState({
+							id: editedNote.id,
+							docs: editedDocs
+						});
+					});
 			}
 		}
 	}
 		
-
 	_addNewDoc = () => {
 		this.setState({
 			id: null,
@@ -129,7 +135,6 @@ class App extends Component {
 				docs: newDocuments
 			}, () => localStorage.setItem('react-notes', JSON.stringify(this.state.docs)));
 		}
-		console.log(this.state.id);
 	}
 	
 }
