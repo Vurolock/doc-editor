@@ -13,6 +13,16 @@ class App extends Component {
 			docs: reactNotes
     	}
   	}
+	
+	componentDidMount() {
+		fetch('http://localhost:4000')
+			.then(res => res.json())
+			.then(notes => {
+				this.setState({
+					docs: notes
+				});
+			});
+	}
 
   	render() {
     	return (
