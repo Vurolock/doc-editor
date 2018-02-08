@@ -7,8 +7,8 @@ class App extends Component {
   	constructor(props) {
     	super(props);
     	this.state = {
-			index: null,
-			title: '',  
+			id: null,
+			title: '',
 			content: '',
 			docs: reactNotes
     	}
@@ -28,13 +28,13 @@ class App extends Component {
     	return (
       	<main>
 			<List
-				docIndex={this.state.index}
+				docId={this.state.id}
           		listDocs={this.state.docs}
 				clickHandler={this._setListDocument}
 				newDocClickHandler={this._addNewDoc}
         	/>
         	<Editor
-				docIndex={this.state.index}
+				docId={this.state.id}
 				displayContent={this.state.content}
 				displayTitle={this.state.title}
 				changeHandler={this._setEditorDocument}
@@ -45,38 +45,38 @@ class App extends Component {
     	);
 	}
 	
-	_setListDocument = (docIndex, docTitle, docContent) => {
+	_setListDocument = (docId, docTitle, docContent) => {
 		this.setState({
-			index: docIndex,
+			id: docId,
 			title: docTitle,
 			content: docContent
 		});
 	}
 
-	_setEditorDocument = (docIndex, docTitle, docContent) => {
+	_setEditorDocument = (docId, docTitle, docContent) => {
 		this.setState({
-			index: docIndex,
+			id: docId,
 			title: docTitle,
 			content: docContent
 		});
 	}
 
-	_editOrNewDocument = (docIndex, docTitle, docContent) => {
+	_editOrNewDocument = (docId, docTitle, docContent) => {
 		const regex = /^\s*$/;
 		if (docTitle.match(regex)) {
 			alert('You must have a title!');
 		} else {
-			if (docIndex === null) {
+			if (docId === null) {
 				this.setState({
-					index: (this.state.docs.length),
+					id: (this.state.docs.length),
 					docs: this.state.docs.concat({
 						title: docTitle,
 						content: docContent
 					})
 				}, () => localStorage.setItem('react-notes', JSON.stringify(this.state.docs)));
 			} else {
-				let newDocuments = this.state.docs.map((doc, index) => {
-					if (index === docIndex) {
+				let newDocuments = this.state.docs.map((doc, id) => {
+					if (id === docId) {
 						doc.title = docTitle;
 						doc.content = docContent;
 					}
@@ -86,31 +86,31 @@ class App extends Component {
 					docs: newDocuments
 				}, () => localStorage.setItem('react-notes', JSON.stringify(this.state.docs)));
 			}
-			console.log(this.state.index);
+			console.log(this.state.id);
 		}
 	}
 		
 
 	_addNewDoc = () => {
 		this.setState({
-			index: null,
+			id: null,
 			title: '',  
 			content: ''
 		});
 	}
 
-	_deleteDocument = (docIndex) => {
+	_deleteDocument = (docId) => {
 		let confirmation = window.confirm(`Really delete '${this.state.title}'?`);
 		if (confirmation) {
-			let newDocuments = this.state.docs.filter( (doc, index) => index !== docIndex);
+			let newDocuments = this.state.docs.filter( (doc, id) => id !== docId);
 			this.setState({
-				index: null,
+				id: null,
 				title: '',  
 				content: '',
 				docs: newDocuments
 			}, () => localStorage.setItem('react-notes', JSON.stringify(this.state.docs)));
 		}
-		console.log(this.state.index);
+		console.log(this.state.id);
 	}
 	
 }

@@ -15,7 +15,7 @@ const Editor = (props) => {
                     placeholder="Title..."
                     value={props.displayTitle}
                     onChange={ (event) => {
-                        props.changeHandler(props.docIndex, event.target.value, props.displayContent)
+                        props.changeHandler(props.docId, event.target.value, props.displayContent)
                     }}
                 >
                 </input>
@@ -26,7 +26,7 @@ const Editor = (props) => {
                     rows="20"
                     value={props.displayContent}
                     onChange={ (event) => {
-                        props.changeHandler(props.docIndex, props.displayTitle, event.target.value);
+                        props.changeHandler(props.docId, props.displayTitle, event.target.value);
                     }}
                 />
 
@@ -36,7 +36,7 @@ const Editor = (props) => {
                     className="btn btn-primary"
                     type="button"
                     onClick={ () => {
-                        props.clickHandler(props.docIndex, props.displayTitle, props.displayContent);
+                        props.clickHandler(props.docId, props.displayTitle, props.displayContent);
                         changeClass('display-save-alert');
                         setTimeout(changeClass, 2000, '');
                     }}
@@ -48,7 +48,7 @@ const Editor = (props) => {
                     className="btn btn-danger"
                     type="button"
                     onClick={ () => {
-                        props.deleteHandler(props.docIndex);
+                        props.deleteHandler(props.docId);
                     }}
                 >
                     Delete Note
