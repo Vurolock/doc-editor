@@ -67,16 +67,35 @@ class App extends Component {
 			alert('You must have a title!');
 		} else {
 			if (docId === null) {
-				this.setState({
-					id: (this.state.docs.length),
-					docs: this.state.docs.concat({
+				// POSTS to db using JSON header. Body must be stringified to be sent to backend
+				fetch('http://localhost:4000', {
+					method: 'POST',
+					headers: new Headers({
+						'Content-Type': 'application/json'}),
+					body: JSON.stringify({
 						title: docTitle,
 						content: docContent
 					})
-				}, () => localStorage.setItem('react-notes', JSON.stringify(this.state.docs)));
+				}).then(() => {
+					// GETS from db to set state so notes will have ids assigned by db
+					fetch('http://localhost:4000')
+						.then(res => res.json())
+						.then(notes => {
+							this.setState({
+								docs: notes
+							});
+						});
+				})
+				// this.setState({
+				// 	id: (this.state.docs.length),
+				// 	docs: this.state.docs.concat({
+				// 		title: docTitle,
+				// 		content: docContent
+					// })
+				// }, () => localStorage.setItem('react-notes', JSON.stringify(this.state.docs)));
 			} else {
-				let newDocuments = this.state.docs.map((doc, id) => {
-					if (id === docId) {
+				let newDocuments = this.state.docs.map((doc) => {
+					if (doc.id === docId) {
 						doc.title = docTitle;
 						doc.content = docContent;
 					}
@@ -86,7 +105,6 @@ class App extends Component {
 					docs: newDocuments
 				}, () => localStorage.setItem('react-notes', JSON.stringify(this.state.docs)));
 			}
-			console.log(this.state.id);
 		}
 	}
 		

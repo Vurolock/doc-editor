@@ -6,8 +6,6 @@ const List = (props) => {
         if (doc.id === props.docId) {
             theClass = "title active-title"
         }
-        console.log("this doc's id is:");
-        console.log(doc.id);
         return (
             <div
                 key={doc.id}
