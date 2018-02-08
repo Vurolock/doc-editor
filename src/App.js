@@ -30,14 +30,14 @@ class App extends Component {
 			<List
 				docId={this.state.id}
           		listDocs={this.state.docs}
-				clickHandler={this._setListDocument}
+				clickHandler={this._setDocument}
 				newDocClickHandler={this._addNewDoc}
         	/>
         	<Editor
 				docId={this.state.id}
 				displayContent={this.state.content}
 				displayTitle={this.state.title}
-				changeHandler={this._setEditorDocument}
+				changeHandler={this._setDocument}
 				clickHandler={this._editOrNewDocument}
 				deleteHandler={this._deleteDocument}
         	/>
@@ -45,15 +45,7 @@ class App extends Component {
     	);
 	}
 	
-	_setListDocument = (docId, docTitle, docContent) => {
-		this.setState({
-			id: docId,
-			title: docTitle,
-			content: docContent
-		});
-	}
-
-	_setEditorDocument = (docId, docTitle, docContent) => {
+	_setDocument = (docId, docTitle, docContent) => {
 		this.setState({
 			id: docId,
 			title: docTitle,
@@ -127,13 +119,22 @@ class App extends Component {
 	_deleteDocument = (docId) => {
 		let confirmation = window.confirm(`Really delete '${this.state.title}'?`);
 		if (confirmation) {
-			let newDocuments = this.state.docs.filter( (doc, id) => id !== docId);
-			this.setState({
-				id: null,
-				title: '',  
-				content: '',
-				docs: newDocuments
-			}, () => localStorage.setItem('react-notes', JSON.stringify(this.state.docs)));
+			fetch('http://localhost:4000', {
+				method: 'DELETE',
+				headers: new Headers({
+					'Content-Type': 'application/json'}),
+				body: JSON.stringify({
+					id: docId
+				})
+			}).then(() => {
+				let newDocuments = this.state.docs.filter( (doc) => doc.id !== docId);
+				this.setState({
+					id: null,
+					title: '',  
+					content: '',
+					docs: newDocuments
+				}, () => localStorage.setItem('react-notes', JSON.stringify(this.state.docs)));
+			});
 		}
 	}
 	
