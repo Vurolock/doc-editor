@@ -82,6 +82,7 @@ class App extends Component {
 						.then(res => res.json())
 						.then(notes => {
 							this.setState({
+								id: notes[notes.length - 1].id,
 								docs: notes
 							});
 						});
