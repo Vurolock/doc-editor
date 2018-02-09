@@ -31,10 +31,19 @@ const List = (props) => {
                 New Note
             </button>
 
+            <input 
+                type="text"
+                className="form-control list-search"
+                placeholder="Search..."
+                // value={props.displayTitle}
+                onChange={ (event) => props.searchHandler(event.target.value) }
+                >
+                </input>
+
             <div className="dropdown">
 
                 <button 
-                    className="btn btn-info dropdown-toggle new-doc-btn"
+                    className="btn btn-info dropdown-toggle sort-doc-btn"
                     type="button"
                     id="dropdownMenuButton"
                     data-toggle="dropdown"

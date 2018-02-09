@@ -11,7 +11,8 @@ class App extends Component {
 			id: null,
 			title: '',
 			content: '',
-			docs: reactNotes
+			docs: reactNotes,
+			unsearchedDocs: reactNotes
     	}
   	}
 	
@@ -20,7 +21,8 @@ class App extends Component {
 			.then(res => res.json())
 			.then(notes => {
 				this.setState({
-					docs: notes
+					docs: notes,
+					unsearchedDocs: notes
 				});
 			});
 	}
@@ -36,6 +38,7 @@ class App extends Component {
 				sortById={this._sortById}
 				sortByAlphabet={this._sortByAlphabet}
 				sortByUpdated={this._sortByUpdated}
+				searchHandler={this._searchHandler}
         	/>
         	<Editor
 				docId={this.state.id}
@@ -166,6 +169,22 @@ class App extends Component {
 					docs: notes
 				});
 			});
+	}
+
+	_searchHandler = (value) => {
+		let regex = new RegExp(value, 'i');
+		console.log(regex);
+		let searchedDocs = this.state.unsearchedDocs.filter(doc => {
+			return doc.title.match(regex) || doc.content.match(regex);
+		});
+		console.log(searchedDocs);
+		this.setState({
+			docs: this.state.unsearchedDocs
+		}, () => {
+			this.setState({
+				docs: searchedDocs
+			});
+		});
 	}
 }
 
