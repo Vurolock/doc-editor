@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import List from './List';
 import Editor from './Editor';
 import reactNotes from './getReactNotes';
+import { API } from './config';
 
 class App extends Component {
   	constructor(props) {
@@ -15,7 +16,7 @@ class App extends Component {
   	}
 	
 	componentDidMount() {
-		fetch('http://localhost:4000')
+		fetch(API)
 			.then(res => res.json())
 			.then(notes => {
 				this.setState({
@@ -61,7 +62,7 @@ class App extends Component {
 			if (docId === null) {
 				// New note
 				// POSTS to db using JSON header, body must be stringified to be sent to backend
-				fetch('http://localhost:4000', {
+				fetch(API, {
 					method: 'POST',
 					headers: new Headers({
 						'Content-Type': 'application/json'}),
@@ -80,7 +81,7 @@ class App extends Component {
 			} else {
 				// Edit note
 				// PUTS to db using JSON header, body must be stringified to be sent to backend
-				fetch('http://localhost:4000', {
+				fetch(API, {
 					method: 'PUT',
 					headers: new Headers({
 						'Content-Type': 'application/json'}),
@@ -119,7 +120,7 @@ class App extends Component {
 	_deleteDocument = (docId) => {
 		let confirmation = window.confirm(`Really delete '${this.state.title}'?`);
 		if (confirmation) {
-			fetch('http://localhost:4000', {
+			fetch(API, {
 				method: 'DELETE',
 				headers: new Headers({
 					'Content-Type': 'application/json'}),
