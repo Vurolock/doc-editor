@@ -33,6 +33,9 @@ class App extends Component {
           		listDocs={this.state.docs}
 				clickHandler={this._setDocument}
 				newDocClickHandler={this._addNewDoc}
+				sortById={this._sortById}
+				sortByAlphabet={this._sortByAlphabet}
+				sortByUpdated={this._sortByUpdated}
         	/>
         	<Editor
 				docId={this.state.id}
@@ -138,7 +141,34 @@ class App extends Component {
 			});
 		}
 	}
+
+	_sortByAlphabet = () => {
+		let sortedNotes = this.state.docs.sort((a, b) => a.title.localeCompare(b.title));
+		console.log(sortedNotes);
+		this.setState({
+			docs: sortedNotes
+		});
+	}
 	
+	_sortById = () => {
+		let sortedNotes = this.state.docs.sort((a, b) => a.id - b.id);
+		console.log(sortedNotes);
+		this.setState({
+			docs: sortedNotes
+		});
+	}
+
+	_sortByUpdated = () => {
+		let sortedNotes = this.state.docs.sort((a, b) => {
+			const timeDateA = new Date(a.updatedAt).getTime();
+			const timeDateB = new Date(b.updatedAt).getTime();
+			return timeDateB - timeDateA;
+		});
+		console.log(sortedNotes);
+		this.setState({
+			docs: sortedNotes
+		});
+	}
 }
 
 export default App;

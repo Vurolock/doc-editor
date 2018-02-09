@@ -48,9 +48,28 @@ const List = (props) => {
                     className="dropdown-menu"
                     aria-labelledby="dropdownMenuButton"
                 >
-                    <div className="dropdown-item sort-option">ID</div>
-                    <div className="dropdown-item sort-option">Alphabetical</div>
-                    <div className="dropdown-item sort-option">Recently Updated</div>
+
+                    <div
+                        className="dropdown-item sort-option"
+                        onClick={ props.sortById }
+                    >
+                        ID
+                    </div>
+
+                    <div
+                        className="dropdown-item sort-option"
+                        onClick={ props.sortByAlphabet }
+                    >
+                        Alphabetical
+                    </div>
+
+                    <div
+                        className="dropdown-item sort-option"
+                        onClick={ props.sortByUpdated }
+                    >
+                        Recently Updated
+                    </div>
+
                 </div>
 
             </div>

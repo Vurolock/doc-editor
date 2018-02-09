@@ -66,13 +66,13 @@ main {
 .title {
   line-height: 16px;
   height: 17px;
-  margin-bottom: 15px;
+  margin: 0 0 15px 1px;
 }
 
 .title:hover, .active-title {
   cursor: pointer;
   transform: translateX(5px);
-  border-left: 3px solid #ad2a2a;
+  border-left: 3px solid #17a2b8;
   padding-left: 5px;
 }
 
