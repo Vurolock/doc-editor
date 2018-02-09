@@ -159,15 +159,13 @@ class App extends Component {
 	}
 
 	_sortByUpdated = () => {
-		let sortedNotes = this.state.docs.sort((a, b) => {
-			const timeDateA = new Date(a.updatedAt).getTime();
-			const timeDateB = new Date(b.updatedAt).getTime();
-			return timeDateB - timeDateA;
-		});
-		console.log(sortedNotes);
-		this.setState({
-			docs: sortedNotes
-		});
+		fetch(API)
+			.then(res => res.json())
+			.then(notes => {
+				this.setState({
+					docs: notes
+				});
+			});
 	}
 }
 
