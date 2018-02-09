@@ -1,4 +1,5 @@
 import React from 'react';
+import '../node_modules/bootstrap/dist/js/bootstrap.min.js';
 
 const List = (props) => {
     let titles = props.listDocs.map(doc => {
@@ -27,8 +28,32 @@ const List = (props) => {
                 type="button"
                 onClick={ props.newDocClickHandler }
             >
-            New Note
+                New Note
             </button>
+
+            <div className="dropdown">
+
+                <button 
+                    className="btn btn-info dropdown-toggle new-doc-btn"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                >
+                    Sort Notes
+                </button>
+
+                <div
+                    className="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
+                >
+                    <div className="dropdown-item sort-option">ID</div>
+                    <div className="dropdown-item sort-option">Alphabetical</div>
+                    <div className="dropdown-item sort-option">Recently Updated</div>
+                </div>
+
+            </div>
 
             {titles}
 
