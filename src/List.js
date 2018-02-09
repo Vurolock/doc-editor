@@ -1,7 +1,7 @@
 import React from 'react';
 
 const List = (props) => {
-    let titles = props.listDocs.map((doc) => {
+    let titles = props.listDocs.map(doc => {
         let theClass = "title";
         if (doc.id === props.docId) {
             theClass = "title active-title"
@@ -10,17 +10,18 @@ const List = (props) => {
             <div
                 key={doc.id}
                 className={theClass}
-                onClick={ () => {
-                    props.clickHandler(doc.id, doc.title, doc.content);
-                }}
+                onClick={ () => props.clickHandler(doc.id, doc.title, doc.content) }
             >
+
                 {doc.title}
+                
             </div>
         )
     });
 
     return (
         <div className="title-list">
+
             <button
                 className="btn btn-success new-doc-btn"
                 type="button"
@@ -28,7 +29,9 @@ const List = (props) => {
             >
             New Note
             </button>
+
             {titles}
+
         </div>
     );
 }

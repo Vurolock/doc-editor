@@ -128,7 +128,7 @@ class App extends Component {
 					id: docId
 				})
 			}).then(() => {
-				let newDocuments = this.state.docs.filter( (doc) => doc.id !== docId);
+				let newDocuments = this.state.docs.filter(doc => doc.id !== docId);
 				this.setState({
 					id: null,
 					title: '',  

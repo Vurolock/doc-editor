@@ -8,15 +8,15 @@ const Editor = (props) => {
     
     return (
         <form className="editor">
+
             <div className="form-group">
+
                 <input 
                     type="text"
                     className="form-control editor-title"
                     placeholder="Title..."
                     value={props.displayTitle}
-                    onChange={ (event) => {
-                        props.changeHandler(props.docId, event.target.value, props.displayContent)
-                    }}
+                    onChange={ (event) => props.changeHandler(props.docId, event.target.value, props.displayContent) }
                 >
                 </input>
 
@@ -25,13 +25,13 @@ const Editor = (props) => {
                     placeholder="Content..."
                     rows="20"
                     value={props.displayContent}
-                    onChange={ (event) => {
-                        props.changeHandler(props.docId, props.displayTitle, event.target.value);
-                    }}
+                    onChange={ (event) => props.changeHandler(props.docId, props.displayTitle, event.target.value) }
                 />
 
             </div>
+
             <div className="form-buttons">
+
                 <button
                     className="btn btn-primary"
                     type="button"
@@ -43,17 +43,18 @@ const Editor = (props) => {
                 >
                     Save Changes
                 </button>
+
                 <div id="save-alert">Changes Saved!</div>
+
                 <button
                     className="btn btn-danger"
                     type="button"
-                    onClick={ () => {
-                        props.deleteHandler(props.docId);
-                    }}
+                    onClick={ () => props.deleteHandler(props.docId) }
                 >
                     Delete Note
                 </button>
-            </div>
+
+            </div> 
             
         </form>
     );
