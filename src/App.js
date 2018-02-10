@@ -109,7 +109,7 @@ class App extends Component {
 						this.setState({
 							id: editedNote.id,
 							docs: editedDocs
-						});
+						}, () => localStorage.setItem('react-notes', JSON.stringify(this.state.docs)));
 					});
 			}
 		}
