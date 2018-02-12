@@ -61,7 +61,20 @@ main {
 
 .sort-doc-btn {
   margin-bottom: 16px;
-  width: 100%;
+}
+
+.sorted-by {
+  width: 90px;
+  height: 38px;
+  padding-top: 8px;
+  position: absolute;
+  text-align: center;
+  font-size: 14px;
+  left: 130px;
+  bottom: 16px;
+  background-color: #17a2b8;
+  color: #fff;
+  border-radius: 3px;
 }
 
 .dropdown-menu {

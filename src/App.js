@@ -11,6 +11,7 @@ class App extends Component {
 			id: null,
 			title: '',
 			content: '',
+			sortedBy: 'Last Update',
 			docs: reactNotes,
 			unsearchedDocs: reactNotes
     	}
@@ -31,6 +32,7 @@ class App extends Component {
     	return (
       	<main>
 			<List
+				sortedBy={this.state.sortedBy}
 				docId={this.state.id}
           		listDocs={this.state.docs}
 				clickHandler={this._setDocument}
@@ -149,6 +151,7 @@ class App extends Component {
 		let sortedNotes = this.state.docs.sort((a, b) => a.title.localeCompare(b.title));
 		console.log(sortedNotes);
 		this.setState({
+			sortedBy: 'Alphabet',
 			docs: sortedNotes
 		});
 	}
@@ -157,6 +160,7 @@ class App extends Component {
 		let sortedNotes = this.state.docs.sort((a, b) => a.id - b.id);
 		console.log(sortedNotes);
 		this.setState({
+			sortedBy: 'ID',
 			docs: sortedNotes
 		});
 	}
@@ -166,12 +170,14 @@ class App extends Component {
 			.then(res => res.json())
 			.then(notes => {
 				this.setState({
+					sortedBy: 'Last Update',
 					docs: notes
 				});
 			});
 	}
 
 	_searchHandler = (value) => {
+		value = regexEscape(value);
 		let regex = new RegExp(value, 'i');
 		console.log(regex);
 		let searchedDocs = this.state.unsearchedDocs.filter(doc => {
@@ -186,6 +192,10 @@ class App extends Component {
 			});
 		});
 	}
+}
+
+const regexEscape = (value) => {
+	return value.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 }
 
 export default App;

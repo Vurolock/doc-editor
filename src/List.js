@@ -37,8 +37,8 @@ const List = (props) => {
                 placeholder="Search..."
                 // value={props.displayTitle}
                 onChange={ (event) => props.searchHandler(event.target.value) }
-                >
-                </input>
+            >
+            </input>
 
             <div className="dropdown">
 
@@ -50,7 +50,7 @@ const List = (props) => {
                     aria-haspopup="true"
                     aria-expanded="false"
                 >
-                    Sort Notes
+                    Sorted By...
                 </button>
 
                 <div
@@ -69,16 +69,22 @@ const List = (props) => {
                         className="dropdown-item sort-option"
                         onClick={ props.sortByAlphabet }
                     >
-                        Alphabetical
+                        Alphabet
                     </div>
 
                     <div
                         className="dropdown-item sort-option"
                         onClick={ props.sortByUpdated }
                     >
-                        Recently Updated
+                        Last Update
                     </div>
 
+                </div>
+
+                <div
+                    className="sorted-by"
+                >
+                    {props.sortedBy}
                 </div>
 
             </div>
